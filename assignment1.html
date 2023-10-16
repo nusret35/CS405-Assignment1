@@ -1,0 +1,108 @@
+<head>
+    <title>ASSIGNMENT 1</title>
+    <link rel="stylesheet" type="text/css" href="assignment1.css">
+</head>
+<body>
+    <svg id="chart" width="1000" height="1000">
+        <line x1="225" y1="505" x2="225" y2="235" stroke="grey" stroke-width="1"/>
+        <line x1="950" y1="500" x2="220" y2="500" stroke="grey" stroke-width="1"/>
+
+
+        <line x1="220" y1="450" x2="225" y2="450" stroke="grey" stroke-width="1"/>
+        <line x1="220" y1="400" x2="225" y2="400" stroke="grey" stroke-width="1"/>
+        <line x1="220" y1="350" x2="225" y2="350" stroke="grey" stroke-width="1"/>
+        <line x1="220" y1="300" x2="225" y2="300" stroke="grey" stroke-width="1"/>
+        <line x1="220" y1="250" x2="225" y2="250" stroke="grey" stroke-width="1"/>
+
+        <text x="210" y="455">1</text>
+        <text x="210" y="405">2</text>
+        <text x="210" y="355">3</text>
+        <text x="210" y="305">4</text>
+        <text x="210" y="255">5</text>
+
+        <text x="210" y="225">(Per hundred thousand)</text> 
+        <text x="960" y="505">(Year)</text>            
+
+        <text x="245" y="525">2009</text>
+        <text x="295" y="525">2010</text>
+        <text x="345" y="525">2011</text>
+        <text x="395" y="525">2012</text>
+        <text x="445" y="525">2013</text>
+        <text x="495" y="525">2014</text>
+        <text x="545" y="525">2015</text>
+        <text x="595" y="525">2016</text>
+        <text x="645" y="525">2017</text>
+        <text x="695" y="525">2018</text>
+        <text x="745" y="525">2019</text>
+        <text x="795" y="525">2020</text>
+        <text x="845" y="525">2021</text>
+        <text x="895" y="525">2022</text>
+
+
+    </svg>
+    <script>
+        var data = {
+            2009 : 4.02,
+            2010 : 4.01,
+            2011 : 3.61,
+            2012 : 4.37,
+            2013 : 4.27,
+            2014 : 4.11,
+            2015 : 4.15,
+            2016 : 4.03,
+            2017 : 3.94,
+            2018 : 4.11,
+            2019 : 4.21,
+            2020 : 4.45,
+            2021 : 4.98,
+            2022 : 4.88
+        };
+        const keys = Object.keys(data);
+        const values = Object.values(data);
+        var xValue = 250
+        var svg = document.getElementById("chart");
+        var points = [];
+        for (const key in keys) {
+            var bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            var point = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            var yValue = 50*values[key];
+
+            bar.setAttribute("x",xValue);
+            bar.setAttribute("y", 500-yValue);
+            bar.setAttribute("width", 20);
+            bar.setAttribute("height", yValue);
+            bar.setAttribute("fill", "blue");
+
+            point.setAttribute("x",xValue+5);
+            point.setAttribute("y",500-yValue-15);
+            point.setAttribute("width",10);
+            point.setAttribute("height",10);
+            point.setAttribute("fill","red");
+
+            points.push({
+                "x":xValue+5,
+                "y":500-yValue-10
+            });
+            
+            xValue += 50;
+            svg.appendChild(bar);
+            svg.appendChild(point);
+
+        }
+
+        var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        var d = "M " + points[0].x + " " + points[0].y;
+
+        for (var i = 1; i < points.length; i++) {
+            d += " L " + points[i].x + " " + points[i].y;
+        }
+
+        path.setAttribute("d", d);
+        path.setAttribute("stroke", "red");
+        path.setAttribute("stroke-width", "4"); 
+        path.setAttribute("fill", "none");
+        svg.appendChild(path);
+
+
+    </script>
+</body>
